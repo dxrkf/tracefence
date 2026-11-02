@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>TraceFence audit</title><style>body{background:#0b1220;color:#e2e8f0;font:16px system-ui;max-width:1000px;margin:60px auto;padding:24px}h1{color:#5eead4}pre{background:#152238;padding:24px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}p{line-height:1.6}</style>
+<h1>TraceFence / data flow review</h1><p>Offline analysis. Known sensitive values are redacted. Matches are review evidence, not proof of an attack.</p><pre>{
+  &quot;schema&quot;: &quot;tracefence-report-v1&quot;,
+  &quot;sources&quot;: 1,
+  &quot;sinks&quot;: 2,
+  &quot;finding_count&quot;: 1,
+  &quot;findings&quot;: [
+    {
+      &quot;source&quot;: &quot;vault-read&quot;,
+      &quot;source_tool&quot;: &quot;read_config&quot;,
+      &quot;sink&quot;: &quot;outbound-post&quot;,
+      &quot;sink_tool&quot;: &quot;http_post&quot;,
+      &quot;label&quot;: &quot;demo-api-token&quot;,
+      &quot;matches&quot;: [
+        {
+          &quot;field&quot;: &quot;$[\&quot;diagnostic\&quot;]&quot;,
+          &quot;encoding&quot;: &quot;base64&quot;
+        }
+      ]
+    }
+  ],
+  &quot;interpretation&quot;: &quot;Matching data flow requires review; intent and authorization are unknown.&quot;
+}</pre></html>
